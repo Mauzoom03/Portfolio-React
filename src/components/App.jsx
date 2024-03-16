@@ -1,10 +1,11 @@
 import React from 'react'
-import Designs from './Designs/Designs'
+import DesignsController from './DesignsController/DesignsController'
+import Catalogue from './Catalogue/Catalogue'
 
 function App() {
   return (
     <div>
-      <Designs/>
+      <Catalogue/>
     </div>
   )
 }

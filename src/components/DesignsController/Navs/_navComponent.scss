@@ -1,0 +1,89 @@
+//clases de la informacion que damos al usuario
+.navBarVertical {
+    background-color: rgb(99, 247, 188);
+    width: 100px;
+    padding: 6px;
+
+    .ul {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+        gap: 5px;
+
+        .li {
+            color: #f7639e;
+        }
+    }
+}
+
+.navBarHorizontalStart {
+    background-color: rgb(99, 247, 188);
+    width: 100%;
+    padding: 6px;
+
+    .ul {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        width: 100%;
+        gap: 5px;
+
+        .li {
+            color: #f7639e;
+        }
+    }
+}
+
+.navBarHorizontalCenter {
+    background-color: rgb(99, 247, 188);
+    width: 100%;
+    padding: 6px;
+
+    .ul {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        width: 100%;
+        gap: 5px;
+
+        .li {
+            color: #f7639e;
+        }
+    }
+}
+
+.navBarHorizontalEnd {
+    background-color: rgb(99, 247, 188);
+    width: 100%;
+    padding: 6px;
+
+    .ul {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        width: 100%;
+        gap: 5px;
+
+        .li {
+            color: #f7639e;
+        }
+    }
+}
+
+//estilos de la pagina
+input {
+    width: 100px;
+}
+.styles-editor {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+
+    label {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+    }
+}
