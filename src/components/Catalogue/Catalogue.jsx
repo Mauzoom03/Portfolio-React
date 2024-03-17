@@ -8,7 +8,7 @@ const Catalogue = () => {
           elementType: 'button',
           defaultContent: 'Botón',
           defaultStyles:["clase1", "clase2"],
-          personalStyles: { backgroundColor: '', color: '#000000' },
+          personalStyles: { backgroundColor: '', color: '#000000' }
         },
         {
           name: 'Header',
@@ -46,7 +46,7 @@ const Catalogue = () => {
         }
     ];
 
-    const template = templates[4];
+    const template = templates[5];
     return (
         <DesignsController template={template}/>
     )

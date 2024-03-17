@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import './_navComponent.scss';
 
 const NavComponent = ({ template }) => {
-    const [liValues, setLiValues] = useState(Array.from({ length: template.defaultContent.count }, () => ''));
+    const [liValues, setLiValues] = useState(Array.from({ length: template.defaultContent.count }, () => 'Item'));
     const [bgColor, setBgColor] = useState('');
     const [fontColor, setFontColor] = useState('');
     const [fontSize, setFontSize] = useState('');
@@ -95,36 +95,33 @@ const NavComponent = ({ template }) => {
         return null;
     };
 
+    const copyToClipboard = (elementId) => {
+        const element = document.getElementById(elementId);
+        const range = document.createRange();
+        range.selectNodeContents(element);
+        const selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+        document.execCommand('copy');
+        selection.removeAllRanges();
+    };
+
     return (
         <div className='container-all'>
             <div className='container-editor'>
-                {'<'}
-                {template.elementType}
-                {'>'}
-                <br></br>
-                    {'<'}
-                    {template.defaultContent ? template.defaultContent.children : null}
-                    {'>'}
-                    <br></br>
-                        {Array.from({ length: template.defaultContent.count }).map((_, index) => (
-                        <React.Fragment key={index}>
-                            {'<'}
-                            {template.defaultContent ? template.defaultContent.items : null}
-                            {'>'}
-                                <input type='text' onChange={handleLiChange(index)} maxLength={12}/>
-                            {'</'}
-                            {template.defaultContent ? template.defaultContent.items : null}
-                            {'>'}
-                            <br></br>
-                        </React.Fragment>
-                        ))}
-                    {'</'}
-                    {template.defaultContent ? template.defaultContent.children : null}
-                    {'>'}
-                    <br></br>
-                {'</'}
-                {template.elementType}
-                {'>'}
+                <p>{'<'}{template.elementType}{'>'}</p>
+                <p>{'<'}{template.defaultContent ? template.defaultContent.children : null}{'>'}</p>
+                {Array.from({ length: template.defaultContent.count }).map((_, index) => (
+                <React.Fragment key={index}>
+                    <p>
+                        {'<'}{template.defaultContent ? template.defaultContent.items : null}{'>'}
+                        <input type='text' onChange={handleLiChange(index)} maxLength={12} placeholder='Máximo 12 caracteres'/>
+                        {'</'}{template.defaultContent ? template.defaultContent.items : null}{'>'
+                    }</p>
+                </React.Fragment>
+                ))}
+                <p>{'</'}{template.defaultContent ? template.defaultContent.children : null}{'>'}</p>
+                <p>{'</'}{template.elementType}{'>'}</p>
             </div>
 
             <div className="styles-editor">
@@ -174,59 +171,71 @@ const NavComponent = ({ template }) => {
             </div>
 
             <div className='container-renderized_html'>
-                {'<'}
-                {template.elementType}
-                {'>'}
-                <br></br>
-                    {'<'}
-                    {template.defaultContent ? template.defaultContent.children : null}
-                    {'>'}
-                    <br></br>
-                        {Array.from({ length: template.defaultContent.count }).map((_, index) => (
-                        <React.Fragment key={index}>
-                            {'<'}
-                            {template.defaultContent ? template.defaultContent.items : null}
-                            {'>'}
-                            <span>{liValues[index]}</span>
-                            {'</'}
-                            {template.defaultContent ? template.defaultContent.items : null}
-                            {'>'}
-                            <br></br>
-                        </React.Fragment>
-                        ))}
-                    {'</'}
-                    {template.defaultContent ? template.defaultContent.children : null}
-                    {'>'}
-                    <br></br>
-                {'</'}
-                {template.elementType}
-                {'>'}
+                <div className='title-btn'>
+                    <h4>HTML</h4>
+                    <button onClick={() => copyToClipboard('html')}>Copiar</button>
+                </div>
+                <div id='html' className='html'>
+                    <span>{'<'}{template.elementType}{'>'}</span>
+                    <span>{'<'}{template.defaultContent ? template.defaultContent.children : null}{'>'}</span>
+                    {Array.from({ length: template.defaultContent.count }).map((_, index) => (
+                    <React.Fragment key={index}>
+                        <span> 
+                            {'<' + (template.defaultContent ? template.defaultContent.items : null) + '>'}
+                            {liValues[index]}
+                            {'</' + (template.defaultContent ? template.defaultContent.items : null) + '>'}
+                        </span>
+                    </React.Fragment>
+                    ))}
+                    <span>{'</'}{template.defaultContent ? template.defaultContent.children : null}{'>'}</span>
+                    <span>{'</'}{template.elementType}{'>'}</span>
+                </div>
             </div>
             <div className='container-renderized_css'>
-                <h4>Estilos del {'<nav>'}</h4>
                 <div className='css-nav'>
-                    <p>background-color: {navStyles.backgroundColor}</p>
-                    <p>width: {navStyles.width}</p>
-                    <p>padding: {navStyles.padding}</p>
+                    <div className='title-btn'>
+                        <h4>Estilos del {'<nav>'}</h4>
+                        <button onClick={() => copyToClipboard('css-nav')}>Copiar</button>
+                    </div>
+                    <div className='css' id='css-nav'>
+                        <span>.{template.defaultStyles[0]}{' {'}</span>
+                        <span>background-color: {navStyles.backgroundColor};</span>
+                        <span>width: {navStyles.width};</span>
+                        <span>padding: {navStyles.padding};</span>
+                        <span>{'}'}</span>
+                    </div>
                 </div>
-                <button>Copiar</button>
-                <h4>Estilos de la {'<ul>'}</h4>
+                
                 <div className='css-ul'>
-                    <p>display: {ulStyles.display}</p>
-                    <p>flex-direction: {ulStyles.flexDirection}</p>
-                    <p>justify-content: {ulStyles.justifyContent}</p>
-                    <p>gap: {ulStyles.gap}</p>
-                    <p>width: {ulStyles.width}</p>
+                    <div className='title-btn'>
+                        <h4>Estilos de la {'<ul>'}</h4>
+                        <button onClick={() => copyToClipboard('css-ul')}>Copiar</button>
+                    </div>
+                    <div className='css' id='css-ul'>
+                        <span>.{template.defaultStyles[1]}{' {'}</span>
+                        <span>display: {ulStyles.display};</span>
+                        <span>flex-direction: {ulStyles.flexDirection};</span>
+                        <span>justify-content: {ulStyles.justifyContent};</span>
+                        <span>gap: {ulStyles.gap};</span>
+                        <span>width: {ulStyles.width};</span>
+                        <span>{'}'}</span>
+                    </div>
                 </div>
-                <button>Copiar</button>
-                <h4>Estilos de la {'<li>'}</h4>
+                
                 <div className='css-li'>
-                    <p>color: {liStyles.color}</p>
-                    <p>font-size: {liStyles.fontSize}</p>
-                    <p>font-weight: {liStyles.fontWeight}</p>
-                    <p>text-decoration: {getFirstWord(liStyles.textDecoration)}</p>
+                    <div className='title-btn'>
+                        <h4>Estilos de la {'<li>'}</h4>
+                        <button onClick={() => copyToClipboard('css-li')}>Copiar</button>
+                    </div>
+                    <div className='css' id='css-li'>
+                        <span>.{template.defaultStyles[2]}{' {'}</span>
+                        <span>color: {liStyles.color};</span>
+                        <span>font-size: {liStyles.fontSize};</span>
+                        <span>font-weight: {liStyles.fontWeight};</span>
+                        <span>text-decoration: {getFirstWord(liStyles.textDecoration)};</span>
+                        <span>{'}'}</span>
+                    </div>
                 </div>
-                <button>Copiar</button>
             </div>
         </div>
     )
