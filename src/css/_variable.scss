@@ -1,0 +1,25 @@
+$color-blanco: #272663;
+$color-azul: #6b90c0;
+
+$degradado-azul: linear-gradient(to bottom, $color-blanco, $color-azul);
+
+
+
+
+.roboto-serif {
+    font-family: "Roboto Serif", serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    font-variation-settings:
+      "wdth" 100,
+      "GRAD" 0;
+  }
+
+  $roboto-serif: "Roboto Serif", serif;
+
+  :root {
+    --background-color-dark: #222;
+    --text-color-dark: #fff;
+    --link-color-dark: #00f;
+  }
